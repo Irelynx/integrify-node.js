@@ -20,6 +20,8 @@ model Todo {
   updatedAt   DateTime @updatedAt
   status      String
   user        User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 model User {
