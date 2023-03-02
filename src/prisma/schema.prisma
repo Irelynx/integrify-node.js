@@ -6,15 +6,15 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Todo {
   id          String   @id @default(cuid())
   name        String
-  description String
+  description String?
   userId      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
