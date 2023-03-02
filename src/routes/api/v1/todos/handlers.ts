@@ -1,7 +1,7 @@
 import { BadRequest, Forbidden } from '@/routes/httpErrors';
 import { AsyncRequestHandler } from '@/routes/middlewares';
 import { Todo } from '@prisma/client';
-import { TodoQuery, NewTodoBody, TodoParams, TodoDeleteResponse } from './models';
+import { TodoQuery, NewTodoBody, TodoParams } from './models';
 import db from '@/db';
 
 export const getAll: AsyncRequestHandler<{}, Array<Todo>, never, TodoQuery> =

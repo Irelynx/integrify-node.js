@@ -22,7 +22,3 @@ export const TodoParams = z.object({
   id: z.string().cuid(),
 });
 export type TodoParams = z.infer<typeof TodoParams>;
-
-export interface TodoDeleteResponse {
-  ok: boolean
-}
