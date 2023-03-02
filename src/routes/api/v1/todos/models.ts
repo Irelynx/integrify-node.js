@@ -5,11 +5,11 @@ export const TodoStatus = ['NotStarted', 'OnGoing', 'Completed'] as const;
 export const NewTodoBody = z.object({
   id: z.never().optional(),
   name: z.string(),
-  description: z.string(),
+  description: z.string().optional(),
   userId: z.never().optional(),
   createdAt: z.never().optional(),
   updatedAt: z.never().optional(),
-  status: z.enum(TodoStatus),
+  status: z.enum(TodoStatus).default('NotStarted'),
 });
 export type NewTodoBody = z.infer<typeof NewTodoBody>;
 
