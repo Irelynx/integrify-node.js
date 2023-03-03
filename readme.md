@@ -101,7 +101,7 @@ Put the code in an idiomatic structure that follows the best practices of the ch
 * [x] Project initialization
   * [x] Express (API) with TypeScript
   * [x] Prisma (DB ORM)
-  * [ ] Jest (testing library)
+  * [x] Jest (testing library)
 * [x] Database init
   * [x] Users
   * [x] Todos
@@ -116,19 +116,20 @@ Put the code in an idiomatic structure that follows the best practices of the ch
     * [x] PUT `/:id`
     * [x] DELETE `/:id`
 * [ ] Testing
-  * [ ] User related endpoints:
-    * [ ] POST `/signup`
-    * [ ] POST `/signin`
-    * [ ] PUT `/changePassword`
-  * [ ] `/todos`
-    * [ ] GET `/` (with `status` filter)
-    * [ ] POST `/`
-    * [ ] PUT `/:id`
-    * [ ] DELETE `/:id`
+  * [x] User related endpoints:
+    * [x] POST `/signup`
+    * [x] POST `/signin`
+    * [x] PUT `/changePassword`
+  * [x] `/todos`
+    * [x] GET `/` (with `status` filter)
+    * [x] POST `/`
+    * [x] PUT `/:id`
+    * [x] DELETE `/:id`
   * [ ] JWT basic security tests
   * [ ] Other
 * [ ] Documentation
   * [x] Project about
-  * [ ] How to run
+  * [x] How to run
+  * [ ] How to run (dev)
 * [ ] Dockerize
-* [ ] GitHub CI/CD badges
+* [ ] GitHub CI/CD (with coverage badges)
