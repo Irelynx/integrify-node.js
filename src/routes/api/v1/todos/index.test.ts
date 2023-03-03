@@ -28,10 +28,7 @@ const sharedData: {
   todoAlt: null as any,
 };
 
-const toRemove: Array<
-  { type: 'user'; data: User } |
-  { type: 'todo'; data: Todo }
-> = [];
+const toRemove: Array<{ type: 'user'; data: User } | { type: 'todo'; data: Todo }> = [];
 
 beforeAll(async () => {
   const user = await db.user.findUnique({
@@ -69,7 +66,7 @@ beforeAll(async () => {
     sharedData.token = resAuth.body.token;
     sharedData.authorization += sharedData.token;
   }
-  
+
   const resAuthAlt = await request(app)
     .post(`${APIPrefix}/signin`)
     .set('Content-Type', 'application/json')
@@ -97,7 +94,7 @@ beforeAll(async () => {
     .expect(200);
   sharedData.todo = resTodo.body as Todo;
   toRemove.push({ type: 'todo', data: resTodo.body });
-  
+
   const resTodoCompleted = await request(app)
     .post(`${APIPrefix}/todos`)
     .set('Content-Type', 'application/json')
@@ -131,18 +128,22 @@ beforeAll(async () => {
 afterAll(async () => {
   for (const object of toRemove) {
     if (object.type === 'user') {
-      await db.user.delete({
-        where: {
-          id: object.data.id,
-          email: object.data.email,
-        },
-      }).catch(e => e);
+      await db.user
+        .delete({
+          where: {
+            id: object.data.id,
+            email: object.data.email,
+          },
+        })
+        .catch((e) => e);
     } else if (object.type === 'todo') {
-      await db.todo.delete({
-        where: {
-          id: object.data.id,
-        },
-      }).catch(e => e);
+      await db.todo
+        .delete({
+          where: {
+            id: object.data.id,
+          },
+        })
+        .catch((e) => e);
     }
   }
 });
@@ -202,7 +203,7 @@ describe('POST /todos', () => {
     expect(body).toBeInstanceOf(Object);
     expect(body.message).toBeTruthy();
   });
-  
+
   it('must not accept incorrect body (status)', async () => {
     const res = await request(app)
       .post(`${APIPrefix}/todos`)
@@ -211,7 +212,7 @@ describe('POST /todos', () => {
       .set('Authorization', sharedData.authorization)
       .send({
         name: 'test',
-        status: 'abracadabra'
+        status: 'abracadabra',
       })
       .expect('Content-Type', /json/)
       .expect(422);
@@ -294,7 +295,7 @@ describe('GET /todos', () => {
       expect(todo.userId).toBe(user.id);
     }
   });
-  
+
   it('must have working filter (status)', async () => {
     const expectedStatus = 'Completed';
     const res = await request(app)
@@ -353,7 +354,7 @@ describe('PUT /todos', () => {
     expect(body).toBeInstanceOf(Object);
     expect(body.message).toBeTruthy();
   });
-  
+
   it('must not change user todo without authorization', async () => {
     const res = await request(app)
       .put(`${APIPrefix}/todos/${sharedData.todo.id}`)
@@ -386,7 +387,7 @@ describe('PUT /todos', () => {
     expect(body).toBeInstanceOf(Object);
     expect(body.message).toBeTruthy();
   });
-  
+
   it('must fail on not existed entry', async () => {
     const res = await request(app)
       .put(`${APIPrefix}/todos/${sharedData.todo.id}123232`)
@@ -407,17 +408,17 @@ describe('PUT /todos', () => {
 
 describe('DELETE /toods', () => {
   it('must delete entry', async () => {
-      const res = await request(app)
-        .delete(`${APIPrefix}/todos/${sharedData.todo.id}`)
-        .set('Accept', 'application/json')
-        .set('Authorization', sharedData.authorization)
-        .expect('Content-Type', /json/)
-        .expect(200);
-      const body = res.body as Todo;
-  
-      expect(body).toBeInstanceOf(Object);
-    });
-    
+    const res = await request(app)
+      .delete(`${APIPrefix}/todos/${sharedData.todo.id}`)
+      .set('Accept', 'application/json')
+      .set('Authorization', sharedData.authorization)
+      .expect('Content-Type', /json/)
+      .expect(200);
+    const body = res.body as Todo;
+
+    expect(body).toBeInstanceOf(Object);
+  });
+
   it('must fails if entry already deleted', async () => {
     const res = await request(app)
       .delete(`${APIPrefix}/todos/${sharedData.todo.id}`)
@@ -430,7 +431,7 @@ describe('DELETE /toods', () => {
     expect(body).toBeInstanceOf(Object);
     expect(body.message).toBeTruthy();
   });
-  
+
   it('must fails if entry does not exists', async () => {
     const res = await request(app)
       .delete(`${APIPrefix}/todos/${sharedData.todo.id}321321`)
@@ -443,8 +444,7 @@ describe('DELETE /toods', () => {
     expect(body).toBeInstanceOf(Object);
     expect(body.message).toBeTruthy();
   });
-  
-  
+
   it('must fails if entry belongs to other user', async () => {
     const res = await request(app)
       .delete(`${APIPrefix}/todos/${sharedData.todo.id}`)

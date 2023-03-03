@@ -14,8 +14,8 @@ router.use('/', users);
 router.use('/todos', todos);
 
 export {
-    router,
-    APIPrefix,
-    mountSuffix,
+  router,
+  APIPrefix,
+  mountSuffix,
 };
 export default router;

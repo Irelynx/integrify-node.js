@@ -8,10 +8,7 @@ import { User as UserModel } from './models';
 import { generatePasswordHash } from '@/utils';
 
 const testEmail = 'test.newone@internal.com';
-const toRemove: Array<
-  { type: 'user'; data: User } |
-  { type: 'todo'; data: Todo }
-> = [
+const toRemove: Array<{ type: 'user'; data: User } | { type: 'todo'; data: Todo }> = [
   { type: 'user', data: { email: testEmail } as User },
 ];
 
@@ -86,18 +83,22 @@ beforeAll(async () => {
 afterAll(async () => {
   for (const object of toRemove) {
     if (object.type === 'user') {
-      await db.user.delete({
-        where: {
-          id: object.data.id,
-          email: object.data.email,
-        },
-      }).catch(e => e);
+      await db.user
+        .delete({
+          where: {
+            id: object.data.id,
+            email: object.data.email,
+          },
+        })
+        .catch((e) => e);
     } else if (object.type === 'todo') {
-      await db.todo.delete({
-        where: {
-          id: object.data.id,
-        },
-      }).catch(e => e);
+      await db.todo
+        .delete({
+          where: {
+            id: object.data.id,
+          },
+        })
+        .catch((e) => e);
     }
   }
 });

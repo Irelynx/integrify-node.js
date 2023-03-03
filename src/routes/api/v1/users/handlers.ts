@@ -64,7 +64,7 @@ export const changePassword: AsyncRequestHandler<{}, SignUpResponse, User> =
         id: authUser.id,
       },
     });
-    
+
     if (!user || user.email !== newUserData.email) {
       throw new Forbidden();
     }
