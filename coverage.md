@@ -2,7 +2,7 @@
 
 ## 2023.03.03 
 
-> Commit SHA: ([97b4404cb931b5816af1648f6f0bd0e8315f6829](https://github.com/Irelynx/integrify-node.js/commit/97b4404cb931b5816af1648f6f0bd0e8315f6829))
+> Commit SHA: ([97b4404cb931b5816af1648f6f0bd0e8315f6829](https://github.com/Irelynx/integrify-node.js/tree/97b4404cb931b5816af1648f6f0bd0e8315f6829))
 
 ```
 -------------------------|---------|----------|---------|---------|-------------------
