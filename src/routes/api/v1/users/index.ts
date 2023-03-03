@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { asyncHandler, validateRequestAsync } from "@/routes/middlewares";
 import { User } from "./models";
-import { signup, signin } from './handlers';
+import { signup, signin, changePassword } from './handlers';
+import { validateAuth } from "@/routes/auth";
 
 const router = Router();
 
@@ -16,6 +17,13 @@ router.post(
     validateRequestAsync({ body: User }),
     asyncHandler(signin),
 );
+
+router.put(
+    '/changePassword',
+    validateAuth,
+    validateRequestAsync({ body: User }),
+    asyncHandler(changePassword),
+)
 
 export { router };
 export default router;
