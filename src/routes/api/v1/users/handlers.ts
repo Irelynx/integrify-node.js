@@ -56,6 +56,7 @@ export const changePassword: AsyncRequestHandler<{}, SignUpResponse, User> =
   async function changePassword(req, res) {
     const newUserData = req.body;
     const authUser = req.user;
+    /* istanbul ignore next */
     if (!authUser) throw new Unauthorized();
 
     const user = await db.user.findFirst({

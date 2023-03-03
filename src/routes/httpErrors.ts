@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+// also see jest.config.js (coveragePathIgnorePatterns)
 import http from 'http';
 
 export class HTTPError extends Error {

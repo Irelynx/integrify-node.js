@@ -8,6 +8,7 @@ export const getAll: AsyncRequestHandler<{}, Array<Todo>, never, TodoQuery> =
 async function getAll(req, res) {
   const status = req.query.status;
   const user = req.user;
+  /* istanbul ignore next */
   if (!user) throw new Forbidden();
   
   const todos = await db.todo.findMany({
@@ -24,6 +25,7 @@ export const createOne: AsyncRequestHandler<{}, Todo, NewTodoBody> =
 async function createOne(req, res) {
   const user = req.user;
   const newTodo = req.body;
+  /* istanbul ignore next */
   if (!user) throw new Forbidden();
 
   const todo = await db.todo.create({
@@ -40,6 +42,7 @@ export const deleteOne: AsyncRequestHandler<TodoParams, Todo, never> =
 async function deleteOne(req, res) {
   const user = req.user;
   const id = req.params.id;
+  /* istanbul ignore next */
   if (!user) throw new Forbidden();
 
   const todo = await db.todo.findUnique({
@@ -66,6 +69,7 @@ async function updateOne(req, res) {
   const user = req.user;
   const id = req.params.id;
   const updatedTodo = req.body;
+  /* istanbul ignore next */
   if (!user) throw new Forbidden();
 
   const todo = await db.todo.findUnique({
