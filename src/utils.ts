@@ -6,5 +6,5 @@ export function generatePasswordHash(
 ) {
   const hasher = crypto.createHash('sha256');
   hasher.update(password);
-  return hasher.digest('hex');
+  return hasher.digest(encoding);
 }
